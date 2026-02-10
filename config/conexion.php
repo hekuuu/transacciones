@@ -12,3 +12,4 @@ try {
     die("Error: No se pudo conectar a la base de datos." . $e->getMessage());
 }
 ?>
+/*hola*/
