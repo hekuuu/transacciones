@@ -5,7 +5,15 @@
 }
 
 body { font-family: 'Segoe UI', sans-serif; background: var(--light); margin: 0; padding: 20px; }
-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--primary); margin-bottom: 20px; }
+header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--primary); margin-bottom: 20px; padding: 15px 0; }
+
+.header-left { display: flex; align-items: center; }
+.header-left h1 { margin: 0; }
+
+.header-right { display: flex; align-items: center; gap: 20px; }
+.usuario-info { color: var(--dark); font-weight: 500; }
+.btn-logout { background: #e74c3c; color: white; border: none; padding: 8px 16px; cursor: pointer; border-radius: 5px; font-weight: bold; text-decoration: none; font-size: 14px; }
+.btn-logout:hover { background: #c0392b; }
 
 .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; }
 .card { background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: center; }

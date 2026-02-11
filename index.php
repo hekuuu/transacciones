@@ -1,7 +1,15 @@
 <?php
+session_start();
+
 // Reportar errores por si algo falla en el servidor
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
+
+// Verificar si el usuario está logueado
+if (!isset($_SESSION['usuario_id'])) {
+    header('Location: login.php');
+    exit;
+}
 ?>
 
 <!DOCTYPE html>
@@ -13,8 +21,14 @@ error_reporting(E_ALL);
 </head>
 <body>
     <header>
-        <h1>Kitchenware</h1>
-        <div id="cart-icon">🛒 <span id="cart-count">0</span></div>
+        <div class="header-left">
+            <h1>Kitchenware</h1>
+        </div>
+        <div class="header-right">
+            <span class="usuario-info">Hola, <?= htmlspecialchars($_SESSION['usuario_nombre']) ?></span>
+            <div id="cart-icon">🛒 <span id="cart-count">0</span></div>
+            <a href="api/logout.php" class="btn-logout">Cerrar Sesión</a>
+        </div>
     </header>
 
     <main id="app">

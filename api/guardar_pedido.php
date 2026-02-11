@@ -1,5 +1,14 @@
 <?php
+session_start();
 require_once '../config/conexion.php';
+
+// Verificar que el usuario está logueado
+if (!isset($_SESSION['usuario_id'])) {
+    header('Content-Type: application/json');
+    echo json_encode(['status' => 'error', 'mensaje' => 'No autorizado']);
+    http_response_code(401);
+    exit;
+}
 
 $data = json_decode(file_get_contents('php://input'), true);
 
@@ -11,9 +20,9 @@ if (!$data) {
 try {
     $pdo->beginTransaction();
 
-    // 1. Insertar el pedido
-    $stmt = $pdo->prepare("INSERT INTO pedidos (total) VALUES (?)");
-    $stmt->execute([$data['total']]);
+    // 1. Insertar el pedido (ahora con usuario_id)
+    $stmt = $pdo->prepare("INSERT INTO pedidos (usuario_id, total) VALUES (?, ?)");
+    $stmt->execute([$_SESSION['usuario_id'], $data['total']]);
     $pedidoId = $pdo->lastInsertId();
 
     // 2. Insertar detalles
